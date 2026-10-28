@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatSphere | Welcome</title>
+    <meta name="theme-color" content="#17142c">
+    <link rel="icon" type="image/svg+xml" href="/assets/chatsphere-logo.svg">
+
+    <style>
+        :root {
+            --primary: #6255e7;
+            --primary-dark: #4e42c9;
+            --text: #20213a;
+            --muted: #85869b;
+            --border: #e6e7f0;
+            --background: #f6f7fc;
+            --success: #178653;
+            --danger: #c83950;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, #e5e5ff 0, transparent 30%),
+                radial-gradient(circle at 90% 90%, #e4f5ff 0, transparent 32%),
+                var(--background);
+            color: var(--text);
+        }
+
+        body::after { content: ''; position: fixed; right: -80px; bottom: -95px; width: 370px; height: 370px; opacity: .045; pointer-events: none; background: url('/assets/chatsphere-logo.svg') center/contain no-repeat; filter: grayscale(1); }
+
+        .portal {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: min(100%, 990px);
+            min-height: 600px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid rgba(225, 226, 241, 0.8);
+            border-radius: 28px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 25px 80px rgba(50, 48, 105, 0.12);
+        }
+
+        .welcome-panel {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 42px;
+            color: white;
+            background: linear-gradient(145deg, #7367f0, #5146c8 68%, #453ab4);
+        }
+
+        .welcome-panel::before,
+        .welcome-panel::after {
+            position: absolute;
+            content: "";
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome-panel::before {
+            width: 330px;
+            height: 330px;
+            right: -150px;
+            top: 140px;
+        }
+
+        .welcome-panel::after {
+            width: 240px;
+            height: 240px;
+            right: -105px;
+            top: 185px;
+        }
+
+        .brand {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 23px;
+            font-weight: 750;
+            letter-spacing: -0.7px;
+        }
+
+        .brand-icon {
+            display: grid;
+            overflow: hidden;
+            place-items: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.16);
+            font-size: 24px;
+        }
+        .brand-icon img { width: 100%; height: 100%; object-fit: cover; display:block; }
+
+        .welcome-copy {
+            position: relative;
+            z-index: 1;
+            margin: 60px 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.11);
+            font-size: 12px;
+            font-weight: 650;
+            letter-spacing: 0.4px;
+        }
+
+        .online-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #84f2bc;
+        }
+
+        .welcome-copy h1 {
+            max-width: 390px;
+            margin-bottom: 20px;
+            font-size: clamp(35px, 4vw, 49px);
+            line-height: 1.12;
+            letter-spacing: -1.8px;
+        }
+
+        .welcome-copy p {
+            max-width: 360px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 13px;
+        }
+
+        .feature-icon {
+            display: grid;
+            place-items: center;
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .copyright {
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 11px;
+        }
+
+        .form-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 44px;
+        }
+
+        .form-content {
+            width: 100%;
+            max-width: 365px;
+        }
+
+        .mobile-brand {
+            display: none;
+        }
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading h2 {
+            margin-bottom: 9px;
+            font-size: 30px;
+            letter-spacing: -0.9px;
+        }
+
+        .form-heading p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 5px;
+            margin-bottom: 27px;
+            border-radius: 12px;
+            background: #f0f1f8;
+        }
+
+        .tab {
+            padding: 12px 8px;
+            border: 0;
+            border-radius: 9px;
+            background: transparent;
+            color: #777991;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 650;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: 0 2px 8px rgba(31, 33, 69, 0.08);
+        }
+
+        .field {
+            margin-bottom: 19px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .field input {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            outline: none;
+            background: #fff;
+            color: var(--text);
+            font: inherit;
+            font-size: 13px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .field input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(98, 85, 231, 0.1);
+        }
+
+        .field input::placeholder {
+            color: #b0b1c0;
+        }
+
+        .password-input {
+            padding-right: 70px !important;
+        }
+
+        .show-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            padding: 5px;
+            border: 0;
+            background: transparent;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .hint {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .primary-button {
+            display: flex;
+            width: 100%;
+            min-height: 49px;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin-top: 8px;
+            border: 0;
+            border-radius: 11px;
+            background: var(--primary);
+            color: white;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 750;
+            cursor: pointer;
+            box-shadow: 0 7px 16px rgba(98, 85, 231, 0.2);
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .primary-button:disabled {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .status {
+            display: none;
+            padding: 12px 13px;
+            margin: 0 0 18px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 12px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .status.visible {
+            display: block;
+        }
+
+        .status.success {
+            border-color: #c9efdc;
+            background: #effbf5;
+            color: var(--success);
+        }
+
+        .status.error {
+            border-color: #f5d1d7;
+            background: #fff3f5;
+            color: var(--danger);
+        }
+
+        .form-footer {
+            margin-top: 25px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 14px;
+            color: #777991;
+            font-size: 11px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 15px;
+            }
+
+            .portal {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                min-height: auto;
+                border-radius: 22px;
+            }
+
+            .welcome-panel {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 32px 25px;
+            }
+
+            .mobile-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 31px;
+                color: var(--primary);
+                font-size: 20px;
+                font-weight: 750;
+            }
+
+            .mobile-brand-icon {
+                display: grid;
+                place-items: center;
+                width: 41px;
+                height: 41px;
+                border-radius: 13px;
+                background: #efedff;
+                font-size: 22px;
+            }
+
+            .form-heading h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="portal">
+        <section class="welcome-panel">
+            <div class="brand">
+                <div class="brand-icon"><img src="/assets/chatsphere-logo.svg" alt="ChatSphere logo"></div>
+                <span>ChatSphere</span>
+            </div>
+
+            <div class="welcome-copy">
+                <div class="eyebrow">
+                    <span class="online-dot"></span>
+                    YOUR SPACE. YOUR PEOPLE.
+                </div>
+
+                <h1>Conversations that bring us closer.</h1>
+
+                <p>
+                    Connect with friends, share ideas, and join conversations
+                    in one welcoming space built for real-time communication.
+                </p>
+            </div>
+
+            <div>
+                <ul class="feature-list">
+                    <li>
+                        <span class="feature-icon">↗</span>
+                        Real-time messaging
+                    </li>
+                    <li>
+                        <span class="feature-icon">◎</span>
+                        Separate rooms for every conversation
+                    </li>
+                    <li>
+                        <span class="feature-icon">✦</span>
+                        Your own ChatSphere identity
+                    </li>
+                </ul>
+
+                <p class="copyright">
+                    © 2026 ChatSphere · Real-Time Chat Application
+                </p>
+            </div>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-content">
+                <div class="mobile-brand">
+                    <span class="mobile-brand-icon">◉</span>
+                    <span>ChatSphere</span>
+                </div>
+
+                <div class="form-heading">
+                    <h2 id="heading">Welcome back</h2>
+                    <p id="subheading">
+                        Sign in to continue your conversations.
+                    </p>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Account options">
+                    <button
+                        class="tab active"
+                        id="login-tab"
+                        type="button"
+                        role="tab"
+                        aria-selected="true"
+                    >
+                        Sign in
+                    </button>
+
+                    <button
+                        class="tab"
+                        id="register-tab"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                    >
+                        Create account
+                    </button>
+                </div>
+
+                <div
+                    id="status"
+                    class="status"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+                <form id="auth-form">
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <div class="input-wrap">
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your username"
+                                minlength="3"
+                                maxlength="20"
+                                pattern="[A-Za-z0-9_]{3,20}"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                        <p class="hint">
+                            Use 3–20 letters, numbers, or underscores.
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <div class="input-wrap">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="password-input"
+                                placeholder="Enter your password"
+                                minlength="8"
+                                maxlength="128"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="toggle-password"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field" id="confirm-field" hidden>
+                        <label for="confirm-password">Confirm password</label>
+
+                        <div class="input-wrap">
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirmPassword"
+                                class="password-input"
+                                placeholder="Re-enter your password"
+                                minlength="8"
+                                maxlength="128"
+                                autocomplete="new-password"
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="toggle-confirm"
+                                aria-label="Show confirmation password"
+                            >
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="primary-button" id="submit-button" type="submit">
+                        <span id="button-text">Sign in to ChatSphere</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    By continuing, you agree to use ChatSphere responsibly.
+                    <div class="security-note">
+                        <span aria-hidden="true">▣</span>
+                        <span>Password protection enabled</span>
+                    </div>
+                    <p style="margin-top: 12px;">
+                        Accounts are stored in memory and are reset when
+                        the server restarts.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const loginTab = document.getElementById("login-tab");
+        const registerTab = document.getElementById("register-tab");
+        const heading = document.getElementById("heading");
+        const subheading = document.getElementById("subheading");
+        const authForm = document.getElementById("auth-form");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const confirmInput = document.getElementById("confirm-password");
+        const confirmField = document.getElementById("confirm-field");
+        const submitButton = document.getElementById("submit-button");
+        const buttonText = document.getElementById("button-text");
+        const statusBox = document.getElementById("status");
+
+        let mode = "login";
+
+        function showStatus(message, type) {
+            statusBox.textContent = message;
+            statusBox.className = "status visible " + type;
+        }
+
+        function clearStatus() {
+            statusBox.textContent = "";
+            statusBox.className = "status";
+        }
+
+        function setMode(nextMode) {
+            mode = nextMode;
+            const registering = mode === "register";
+
+            loginTab.classList.toggle("active", !registering);
+            registerTab.classList.toggle("active", registering);
+
+            loginTab.setAttribute("aria-selected", String(!registering));
+            registerTab.setAttribute("aria-selected", String(registering));
+
+            heading.textContent = registering
+                ? "Create your account"
+                : "Welcome back";
+
+            subheading.textContent = registering
+                ? "Join ChatSphere and start connecting."
+                : "Sign in to continue your conversations.";
+
+            confirmField.hidden = !registering;
+            confirmInput.required = registering;
+
+            passwordInput.autocomplete = registering
+                ? "new-password"
+                : "current-password";
+
+            buttonText.textContent = registering
+                ? "Create ChatSphere account"
+                : "Sign in to ChatSphere";
+
+            clearStatus();
+        }
+
+        loginTab.addEventListener("click", function () {
+            setMode("login");
+        });
+
+        registerTab.addEventListener("click", function () {
+            setMode("register");
+        });
+
+        function addPasswordToggle(buttonId, input) {
+            const button = document.getElementById(buttonId);
+
+            button.addEventListener("click", function () {
+                const revealing = input.type === "password";
+                input.type = revealing ? "text" : "password";
+                button.textContent = revealing ? "Hide" : "Show";
+                button.setAttribute(
+                    "aria-label",
+                    revealing ? "Hide password" : "Show password"
+                );
+            });
+        }
+
+        addPasswordToggle("toggle-password", passwordInput);
+        addPasswordToggle("toggle-confirm", confirmInput);
+
+        async function sendAuthRequest(endpoint, payload) {
+            const response = await fetch(endpoint, {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json().catch(function () {
+                return {};
+            });
+
+            if (!response.ok || result.success !== true) {
+                throw new Error(
+                    result.message || "Unable to complete your request."
+                );
+            }
+
+            return result;
+        }
+
+        authForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearStatus();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+
+            if (mode === "register" && password !== confirmPassword) {
+                showStatus("Your passwords do not match.", "error");
+                confirmInput.focus();
+                return;
+            }
+
+            if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+                showStatus(
+                    "Use 3–20 letters, numbers, or underscores for your username.",
+                    "error"
+                );
+                usernameInput.focus();
+                return;
+            }
+
+            if (password.length < 8 || password.length > 128) {
+                showStatus(
+                    "Your password must contain 8–128 characters.",
+                    "error"
+                );
+                passwordInput.focus();
+                return;
+            }
+
+            submitButton.disabled = true;
+            buttonText.textContent = mode === "register"
+                ? "Creating account..."
+                : "Signing in...";
+
+            try {
+                const endpoint = mode === "register"
+                    ? "/api/auth/register"
+                    : "/api/auth/login";
+
+                const result = await sendAuthRequest(endpoint, {
+                    username: username,
+                    password: password
+                });
+
+                // Keep the name expected by the existing chat page.
+                sessionStorage.setItem(
+                    "chatsphereUsername",
+                    result.username
+                );
+
+                showStatus(
+                    mode === "register"
+                        ? "Account created! Opening ChatSphere..."
+                        : "Login successful! Opening ChatSphere...",
+                    "success"
+                );
+
+                // The existing chat page is served as the welcome page.
+                window.location.assign("/");
+            } catch (error) {
+                showStatus(
+                    error.message || "Could not connect to the server.",
+                    "error"
+                );
+            } finally {
+                submitButton.disabled = false;
+                buttonText.textContent = mode === "register"
+                    ? "Create ChatSphere account"
+                    : "Sign in to ChatSphere";
+            }
+        });
+    </script>
+</body>
+</html>
